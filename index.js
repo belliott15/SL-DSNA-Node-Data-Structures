@@ -10,25 +10,33 @@ class LinkedList {
     this.head = new Node(val);
   }
 
-  add(val) {
+  add(val){
     let current = this.head;
     while (current.next) {
       current = current.next;
     }
     current.next = new Node(val);
   }
-
-  removeTail() {
-    let current = this.head;
+  removeTail(){
+    let prev = this.head;
+    let current = this.head.next;
     if (!current) {
-      return current.pop();
+      this.head = null;
+      return;
     }
-    current = current.next;
+    while (current.next) {
+      prev = current;
+      current = current.next;
+    }
+    prev.next = null;
   }
 
   getList() {
     const listArr = [];
     let current = this.head;
+    if (current === null) {
+      return listArr;
+    }
     while (current.next) {
       listArr.push(current.val);
       current = current.next;
